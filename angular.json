@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gymAdmin": {
+    "Spike": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,40 +17,37 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/gym-admin",
+            "allowedCommonJsDependencies": ["apexcharts", "bezier-easing"],
+            "outputPath": {
+              "base": "dist/Spike"
+            },
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/scss/style.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/highlight.js/styles/atom-one-dark.min.css"
             ],
             "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "12mb",
+                  "maximumError": "12mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "12mb",
+                  "maximumError": "12mb"
                 }
               ],
               "outputHashing": "all"
@@ -58,7 +55,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -67,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gymAdmin:build:production"
+              "buildTarget": "Spike:build:production"
             },
             "development": {
-              "buildTarget": "gymAdmin:build:development"
+              "buildTarget": "Spike:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,25 +76,17 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "gymAdmin:build"
+            "buildTarget": "Spike:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }
@@ -104,6 +94,6 @@
     }
   },
   "cli": {
-    "analytics": "c4f5a8cb-1fe4-4236-9038-c9c1b924375b"
+    "analytics": false
   }
 }
