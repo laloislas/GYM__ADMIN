@@ -3,9 +3,7 @@
     <div class="position-relative shaper-wrapper">
       <div class="w-100 position-relative rounded bg-white auth-card">
         <div class="auth-body">
-          <div class="m-t-20">
-            <app-branding></app-branding>
-          </div>
+          
           <div class="row">
             <div class="col-lg-6">
               <div
@@ -25,45 +23,13 @@
                 <div class="row justify-content-center w-100">
                   <div class="col-lg-11">
                     <h4 class="f-w-700 f-s-30 m-0 m-t-20 lh-base">
-                      Welcome to Spike Admin
+                      Portal de administración
                     </h4>
                     <span class="f-s-14 d-block mat-body-1 m-t-8"
-                      >Your Admin Dashboard</span
+                      >Bienvenidos</span
                     >
 
-                    <div class="row m-t-30 p-t-10">
-                      <div class="col-12 col-sm-6">
-                        <button mat-stroked-button class="w-100 m-b-4">
-                          <div class="d-flex align-items-center">
-                            <img
-                              src="/assets/images/svgs/google-icon.svg"
-                              alt="google"
-                              width="16"
-                              class="m-r-8"
-                            />
-                            Sign in with Google
-                          </div>
-                        </button>
-                      </div>
-                      <div class="col-12 col-sm-6">
-                        <button
-                          mat-stroked-button
-                          class="w-100 d-flex align-items-center m-b-4"
-                        >
-                          <div class="d-flex align-items-center">
-                            <img
-                              src="/assets/images/svgs/facebook-icon.svg"
-                              alt="facebook"
-                              width="40"
-                              class="m-r-4"
-                            />
-                            Sign in with FB
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="or-border m-t-30">or sign in with</div>
+                    
 
                     <form
                       class="m-t-30"
@@ -118,9 +84,11 @@
                         }
                       </mat-form-field>
 
+                      
+                      <!--
                       <div class="d-block d-lg-flex align-items-center m-b-12">
                         <mat-checkbox color="primary"
-                          >Remember this Device</mat-checkbox
+                          >Recordar cuenta</mat-checkbox
                         >
                         <a
                           [routerLink]="['/authentication/side-forgot-pwd']"
@@ -128,23 +96,28 @@
                           >Forgot Password ?</a
                         >
                       </div>
+                      -->
+                      
+
+
+
                       <button
                         mat-flat-button
                         color="primary"
                         class="w-100"
                         [disabled]="!form.valid"
                       >
-                        Sign In
+                        Ingresar
                       </button>
                       <!-- input -->
                     </form>
                     <span class="d-block f-w-500 d-block f-s-14 m-t-24"
-                      >New to Spike?
+                      >¿No tienes una cuenta?
                       <a
                         [routerLink]="['/authentication/side-register']"
                         class="text-decoration-none text-primary f-w-500 f-s-14"
                       >
-                        Create an account</a
+                        Registrate</a
                       >
                     </span>
                   </div>
