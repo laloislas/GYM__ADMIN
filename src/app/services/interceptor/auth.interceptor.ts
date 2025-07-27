@@ -1,47 +1,63 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StoreService } from "./../store/store.service";
-import { Observable } from 'rxjs';
-import { App } from 'src/app/model/app.interface';
+import { Observable, finalize } from 'rxjs';
+import { EventService } from '../event/event.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  private activeRequests = 0;
 
-  private store: App;
-
-  // private store: DataApplication;
-  constructor(private StoreService: StoreService) {
-    this.store = this.StoreService.getState();
-  }
+  constructor(
+    private storeService: StoreService,
+    private eventService: EventService
+  ) {}
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    //this.store = this.StoreService.getState();
+
+    // Si la URL de la solicitud comienza con la ruta de los archivos de traducción,
+    // la dejamos pasar sin modificarla.
+    if (request.url.startsWith('./assets/i18n/')) {
+      return next.handle(request);
+    }
+
+    // Para todas las demás solicitudes, aplicamos la lógica de la API.
+    // Muestra el loading si es la primera petición activa.
+    if (this.activeRequests === 0) {
+      this.eventService.showLoading();
+    }
+    this.activeRequests++;
+
+    const store = this.storeService.getState();
     const baseUrl = 'http://localhost:3000/api';
     //const baseUrl = 'http://18.190.48.126:8443/api';
-    const userData = this.store.currentUser;
-    const tokenML = this.store.token;
-    const interceptorNone = request.headers.get('interceptorNone'); // Obtener el valor del encabezado
+    const userData = store.currentUser;
 
+    // Clonamos la solicitud para agregar la URL base de la API.
+    let apiReq = request.clone({
+      url: `${baseUrl}${request.url}`,
+    });
 
-    const pathExcluded = ['./assets/i18n/en.json'];
     if (userData) {
-      request = request.clone({
-        url: baseUrl + request.url,
+      // Si hay un usuario, agregamos el token de autorización.
+      apiReq = apiReq.clone({
         setHeaders: {
-          Authorization: `${this.store.token}`
+          Authorization: `${store.token}`
         },
-      });
-    } else if (!userData) {
-      request = request.clone({
-        url: baseUrl + request.url,
       });
     }
 
-    return next.handle(request);
+    return next.handle(apiReq).pipe(
+      finalize(() => {
+        this.activeRequests--;
+        // Oculta el loading solo cuando todas las peticiones hayan terminado.
+        if (this.activeRequests === 0) {
+          this.eventService.hideLoading();
+        }
+      })
+    );
   }
 }
-
-

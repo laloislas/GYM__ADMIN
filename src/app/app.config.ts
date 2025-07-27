@@ -15,6 +15,8 @@ import {
   withComponentInputBinding,
   withInMemoryScrolling,
 } from '@angular/router';
+
+import { CoreModule } from "./core/core.module";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideClientHydration } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -74,6 +76,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     importProvidersFrom(
       FormsModule,
+      CoreModule.forRoot(),
       ToastrModule.forRoot(),
       ReactiveFormsModule,
       MaterialModule,

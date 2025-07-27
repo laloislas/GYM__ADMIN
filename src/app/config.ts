@@ -20,7 +20,7 @@ export const defaults: AppSettings = {
   boxed: true,
   horizontal: false,
   cardBorder: false,
-  activeTheme: 'aqua_theme',
+  activeTheme: 'cyan_theme',
   language: 'en-us',
   navPos: 'side',
   showSettingsButton: false, // Por defecto, el icono estará oculto

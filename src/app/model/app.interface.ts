@@ -1,6 +1,6 @@
 export interface App {
-    token: string;
-    currentUser: User;
+    token?: string;
+    currentUser?: User;
 }
 
 export interface User {
