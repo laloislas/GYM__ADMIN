@@ -9,10 +9,8 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material.module';
-import { BrandingComponent } from '../../../layouts/full/vertical/sidebar/branding.component';
 import { UserApi } from 'src/app/core/api/user.api';
 import { EventService } from 'src/app/services/event/event.service';
-import { StoreService } from 'src/app/services/store/store.service';
 @Component({
   selector: 'app-side-register',
   standalone: true,
@@ -20,8 +18,7 @@ import { StoreService } from 'src/app/services/store/store.service';
     RouterModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule,
-    BrandingComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './side-register.component.html',
 })

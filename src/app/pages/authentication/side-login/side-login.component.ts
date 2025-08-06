@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material.module';
-import { BrandingComponent } from '../../../layouts/full/vertical/sidebar/branding.component';
 import { AuthenticationApi } from 'src/app/core/api/authentication.api';
 import { StoreService } from 'src/app/services/store/store.service';
 import { App } from 'src/app/model/app.interface';
@@ -17,7 +16,7 @@ import { EventService } from 'src/app/services/event/event.service';
 @Component({
   selector: 'app-side-login',
   standalone: true,
-  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, BrandingComponent],
+  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
   templateUrl: './side-login.component.html',
 })
 export class AppSideLoginComponent {
